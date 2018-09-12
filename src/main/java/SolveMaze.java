@@ -9,6 +9,15 @@ import edu.illinois.cs.cs125.lib.mazemaker.Maze;
  */
 @SuppressWarnings("checkstyle:emptyblock")
 public class SolveMaze {
+    public static boolean wallOnRight(final Maze maze) {
+        maze.turnRight();
+        // Inverting canMove
+        Boolean isWall = maze.canMove() == false;
+        maze.turnLeft();
+        return isWall;
+    }
+
+
 
     /**
      * Implement your maze solving algorithm in the main method below.
@@ -17,7 +26,25 @@ public class SolveMaze {
      */
 
     public static void main(final String[] unused) {
-        /*
+        for (int step = 0; step < 1000; step++) {
+            // Implement your maze solving algorithm here
+
+            if (maze.isFinished()) {
+                break;
+            }
+            if (wallOnRight(maze) == true) {
+                if (maze.canMove() == true) {
+                    maze.move();
+                } else {
+                    maze.turnLeft();
+                }
+            } else {
+                maze.turnRight();
+                maze.move();
+            }
+        }
+
+            /*
          * Create a new 10 x 10 maze. Feel free to change these values.
          */
         Maze maze = new Maze(10, 10);
